@@ -1,33 +1,42 @@
 #include <cstdio>
+#include <cmath>
+#include <iostream>
+using namespace std;
 
-/* N is the number of people standing in the line. */
-int N;
-/* K is the maximum number of people covered by the cloud. */
-int K;
+
+int N; //people 
+int K; //max people covered
 int distances_apart[100005];
 int answer;
 
+int C[100005];
+
 int main(void) {
-    /* Open the input and output files. */
     FILE *input_file = fopen("cloudin.txt", "r");
     FILE *output_file = fopen("cloudout.txt", "w");
 
-    /* Read the values of N and K from the input file.  */
     fscanf(input_file, "%d%d", &N, &K);
 
-    /* Read in information about the distances between people */
+    
     for (int i = 0; i < N-1; i++) {
         fscanf(input_file, "%d", &distances_apart[i]);
     }
 
-    for (int i = 0; i < K; i++){
-        
+    for (int i = 0; i < N-(K); i++){
+        for (int r = 0; r < K; r++){
+            C[i] = C[i] + distances_apart[r + i];
+        }
+        cout << C[i] << endl;
     }
-
-    /* Write the answer to the output file. */
+    answer = C[0];
+    for (int i = 0; i < N-(K); i++){
+        if (answer > C[i]){
+            answer = C[i];
+        }
+    }
+    cout << "  " << answer << endl;
+    
     fprintf(output_file, "%d\n", answer);
-
-    /* Finally, close the input/output files. */
     fclose(input_file);
     fclose(output_file);
 

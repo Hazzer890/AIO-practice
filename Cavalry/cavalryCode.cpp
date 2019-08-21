@@ -20,24 +20,21 @@ int main(void) {
     fscanf(input_file, "%d", &N);
 
     // Read in information about each group size
-    for (int i = 0; i < N; i++) {
+    for (int i = 1; i < N+1; i++) {
         fscanf(input_file, "%d", &squad_sizes[i]);
     }
 
-    for(int a = 0; a < 1000; a++){
-        for(int i = 0; i < 100005; i++) {
+    for(int a = 1; a < N+2; a++){
+        for(int i = 1; i < 100005; i++) {
             if (squad_sizes[i] == a){
                 squad_counter[a]++;
             }
         }
-    }
-
-    for(int r = 0; r < 1000; r++){
-        if(squad_counter[r] != 0 && r != 0){
-            check = squad_counter[r]/r;
-            if(abs(check-int(check))>0) is_possible = 0;
+        if(squad_counter[a] != 0 && a != 0){
+            check = squad_counter[a]/(a);
+            if(abs(check-floor(check))>0) is_possible = 0;
             else is_possible = 1;
-            cout << check << "|" << is_possible;
+            //cout << check << "|" << is_possible << "|" << squad_counter[r] << "  ";
         }
     }
     
